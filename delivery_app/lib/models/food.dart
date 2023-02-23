@@ -100,4 +100,89 @@ class Food {
       // Add more Food objects as needed
     ];
   }
+  static List<Food> generatePopularFoods(){
+    return[
+      Food(
+        'assets/images/dish1.png',
+        'Highly Recommended',
+        'Pasta',
+        '20 min',
+        4.5,
+        '600 kcal',
+        17,
+        0,
+        [
+          {
+            'Noodle': 'assets/images/ingre1.png',
+          },
+          {
+            'Shrimp': 'assets/images/ingre2.png',
+          }
+        ] as Map<String, String> ,
+        'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
+
+      ),
+      Food(
+        'assets/images/dish2.png',
+        'Highly Recommended',
+        'Pasta',
+        '20 min',
+        4.5,
+        '600 kcal',
+        17,
+        0,
+        [
+          {
+            'Noodle': 'assets/images/ingre1.png',
+          },
+          {
+            'Shrimp': 'assets/images/ingre2.png',
+          }
+        ] as Map<String, String> ,
+        'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
+
+      ),
+      Food(
+        'assets/images/dish3.png',
+        'Highly Recommended',
+        'Pasta',
+        '20 min',
+        4.5,
+        '600 kcal',
+        17,
+        0,
+        [
+          {
+            'Noodle': 'assets/images/ingre1.png',
+          },
+          {
+            'Shrimp': 'assets/images/ingre2.png',
+          }
+        ] as Map<String, String> ,
+        'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
+
+      ),
+      Food(
+          'assets/images/dish4.png',
+          'Highly Recommended',
+          'Pasta',
+          '20 min',
+          4.5,
+          '600 kcal',
+          17,
+          0,
+          [
+            {
+              'Noodle': 'assets/images/ingre1.png',
+            },
+            {
+              'Shrimp': 'assets/images/ingre2.png',
+            }
+          ] as Map<String, String> ,
+          'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
+          highLight: true
+      ),
+      // Add more Food objects as needed
+    ];
+  }
 }
