@@ -1,12 +1,31 @@
+import 'package:delivery_app/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget{
+import '../../widgets/custom_app_bar.dart';
+
+class HomePage extends StatefulWidget {
+
   @override
-  Widget build(BuildContext context){
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  var selected=0;
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('Home Page'),
+      backgroundColor: kBackground,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomAppBar(
+            Icons.arrow_back_outlined,
+              Icons.search_outlined
+          )
+        ],
       ),
+
     );
   }
 }
+
