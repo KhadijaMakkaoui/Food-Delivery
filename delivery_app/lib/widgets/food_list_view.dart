@@ -21,9 +21,11 @@ FoodListView(
         controller: pageController,
         onPageChanged: (index) => callback(index),
         children:
-          category.map((e) =>
-          ListView.separated(
-            itemBuilder: (context, index) => FoodItem(
+          category
+              .map((e) => ListView.separated(
+            padding: EdgeInsets.zero,
+            itemBuilder:
+                (context, index) => FoodItem(
               restaurant.menu[category[selected]]![index],
             ),
             separatorBuilder: (_, index) => const SizedBox(height: 15),

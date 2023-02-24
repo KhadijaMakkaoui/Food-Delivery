@@ -18,22 +18,22 @@ class Food {
   static List<Food> generateRecommendFoods(){
     return[
       Food(
-        'assets/images/dish1.png',
+        'assets/images/dish3.png',
         'Highly Recommended',
-        'Chicken Burger',
+        'Veggies Noodles',
         '20 min',
         4.5,
         '600 kcal',
-         17,
-         0,
-         [
-           {
-             'Noodle': 'assets/images/ingre1.png',
-           },
-           {
-             'Shrimp': 'assets/images/ingre2.png',
-           }
-         ]  ,
+        17,
+        0,
+        [
+          {
+            'Noodle': 'assets/images/ingre1.png',
+          },
+          {
+            'Shrimp': 'assets/images/ingre2.png',
+          }
+        ]  ,
         'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
 
       ),
@@ -58,9 +58,9 @@ class Food {
 
       ),
       Food(
-        'assets/images/dish3.png',
+        'assets/images/dish1.png',
         'Highly Recommended',
-        'Veggies Noodles',
+        'Chicken Burger',
         '20 min',
         4.5,
         '600 kcal',
