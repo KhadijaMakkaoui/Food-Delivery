@@ -7,7 +7,7 @@ class Food {
   String energy;
   num price;
   num quantity;
-  Map<String,String> ingredients;
+  List<Map<String,String>>ingredients;
   String about;
   bool highLight;
 
@@ -33,7 +33,7 @@ class Food {
            {
              'Shrimp': 'assets/images/ingre2.png',
            }
-         ] as Map<String, String> ,
+         ]  ,
         'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
 
       ),
@@ -53,7 +53,7 @@ class Food {
           {
             'Shrimp': 'assets/images/ingre2.png',
           }
-        ] as Map<String, String> ,
+        ],
         'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
 
       ),
@@ -73,7 +73,7 @@ class Food {
           {
             'Shrimp': 'assets/images/ingre2.png',
           }
-        ] as Map<String, String> ,
+        ]  ,
         'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
 
       ),
@@ -93,7 +93,7 @@ class Food {
           {
             'Shrimp': 'assets/images/ingre2.png',
           }
-        ] as Map<String, String> ,
+        ]  ,
         'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
         highLight: true
       ),
@@ -118,7 +118,7 @@ class Food {
           {
             'Shrimp': 'assets/images/ingre2.png',
           }
-        ] as Map<String, String> ,
+        ]  ,
         'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
 
       ),
@@ -138,7 +138,7 @@ class Food {
           {
             'Shrimp': 'assets/images/ingre2.png',
           }
-        ] as Map<String, String> ,
+        ]  ,
         'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
 
       ),
@@ -158,7 +158,7 @@ class Food {
           {
             'Shrimp': 'assets/images/ingre2.png',
           }
-        ] as Map<String, String> ,
+        ] ,
         'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
 
       ),
@@ -178,7 +178,7 @@ class Food {
             {
               'Shrimp': 'assets/images/ingre2.png',
             }
-          ] as Map<String, String> ,
+          ] ,
           'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
           highLight: true
       ),
