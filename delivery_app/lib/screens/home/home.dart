@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../models/restaurant.dart';
 import '../../widgets/custom_app_bar.dart';
+import '../../widgets/food_list_view.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -14,6 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var selected=0;
+  final pageController = PageController();
   final restaurant = Restaurant.generateRestaurant();
   @override
   Widget build(BuildContext context) {
@@ -32,11 +34,25 @@ class _HomePageState extends State<HomePage> {
             setState(() {
               selected=index;
             });
-              }, restaurant)
+            pageController.jumpToPage(index);
+            }, restaurant),
+          Expanded(
+            child: FoodListView(
+              selected,
+                (int index){
+                  setState(() {
+                    selected=index;
+                  });
+                },
+              pageController,
+              restaurant
+            ),
+          )
         ],
       ),
 
     );
   }
 }
+
 

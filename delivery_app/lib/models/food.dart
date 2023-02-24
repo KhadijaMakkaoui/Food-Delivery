@@ -20,7 +20,7 @@ class Food {
       Food(
         'assets/images/dish1.png',
         'Highly Recommended',
-        'Pasta',
+        'Chicken Burger',
         '20 min',
         4.5,
         '600 kcal',
@@ -40,7 +40,7 @@ class Food {
       Food(
         'assets/images/dish2.png',
         'Highly Recommended',
-        'Pasta',
+        'Meat Burger',
         '20 min',
         4.5,
         '600 kcal',
@@ -60,7 +60,7 @@ class Food {
       Food(
         'assets/images/dish3.png',
         'Highly Recommended',
-        'Pasta',
+        'Veggies Noodles',
         '20 min',
         4.5,
         '600 kcal',
@@ -105,7 +105,7 @@ class Food {
       Food(
         'assets/images/dish1.png',
         'Highly Recommended',
-        'Pasta',
+        'Chicken Burger',
         '20 min',
         4.5,
         '600 kcal',
@@ -125,7 +125,27 @@ class Food {
       Food(
         'assets/images/dish2.png',
         'Highly Recommended',
-        'Pasta',
+        'Meat Burger',
+        '20 min',
+        4.5,
+        '600 kcal',
+        17,
+        0,
+        [
+          {
+            'Noodle': 'assets/images/ingre1.png',
+          },
+          {
+            'Shrimp': 'assets/images/ingre2.png',
+          }
+        ],
+        'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
+
+      ),
+      Food(
+        'assets/images/dish3.png',
+        'Highly Recommended',
+        'Veggies Noodles',
         '20 min',
         4.5,
         '600 kcal',
@@ -139,26 +159,6 @@ class Food {
             'Shrimp': 'assets/images/ingre2.png',
           }
         ]  ,
-        'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
-
-      ),
-      Food(
-        'assets/images/dish3.png',
-        'Highly Recommended',
-        'Pasta',
-        '20 min',
-        4.5,
-        '600 kcal',
-        17,
-        0,
-        [
-          {
-            'Noodle': 'assets/images/ingre1.png',
-          },
-          {
-            'Shrimp': 'assets/images/ingre2.png',
-          }
-        ] ,
         'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
 
       ),
@@ -178,7 +178,7 @@ class Food {
             {
               'Shrimp': 'assets/images/ingre2.png',
             }
-          ] ,
+          ]  ,
           'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
           highLight: true
       ),
