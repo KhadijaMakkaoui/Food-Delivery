@@ -15,7 +15,7 @@ class Restaurant{
   static Restaurant generateRestaurant(){
     return Restaurant('Burger King', '20-30 min', '2.4 km', 'Restaurant', 'assets/images/res_logo.png', 'Orange sandwich is delicious', 4.7,
       {
-        'Recommend': Food.generateRecommendFoods(),
+        'Recommended': Food.generateRecommendFoods(),
         'Popular': Food.generatePopularFoods(),
         'Noodles':[],
         'Pizza': []
