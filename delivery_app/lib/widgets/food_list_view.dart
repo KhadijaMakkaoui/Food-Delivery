@@ -30,7 +30,9 @@ FoodListView(
                       onTap:(){
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) =>const DetailPage()),);
+                            builder: (context) =>DetailPage(
+                              restaurant.menu[category[selected]]![index],
+                            )),);
 
                       },
                     child:

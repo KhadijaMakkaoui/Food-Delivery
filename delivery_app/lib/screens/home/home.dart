@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomAppBar(
-            Icons.arrow_back_outlined,
+            Icons.arrow_back_ios_outlined,
               Icons.search_outlined
           ),
           RestaurantInfo(),
