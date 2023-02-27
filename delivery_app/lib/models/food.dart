@@ -52,7 +52,14 @@ class Food {
           },
           {
             'Shrimp': 'assets/images/ingre2.png',
-          }
+          },
+
+        {
+        'egg': 'assets/images/ingre3.png',
+        },
+        {
+        'green': 'assets/images/ingre4.png',
+        }
         ],
         'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
 
@@ -87,6 +94,12 @@ class Food {
         17,
         0,
         [
+        {
+        'egg': 'assets/images/ingre3.png',
+        },
+        {
+        'green': 'assets/images/ingre4.png',
+        },
           {
             'Noodle': 'assets/images/ingre1.png',
           },
@@ -105,7 +118,7 @@ class Food {
       Food(
         'assets/images/dish1.png',
         'Highly Recommended',
-        'Chicken Burger',
+        'Noodles',
         '20 min',
         4.5,
         '600 kcal',
@@ -117,6 +130,12 @@ class Food {
           },
           {
             'Shrimp': 'assets/images/ingre2.png',
+          },
+          {
+            'egg': 'assets/images/ingre3.png',
+          },
+          {
+            'green': 'assets/images/ingre4.png',
           }
         ]  ,
         'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
@@ -125,7 +144,7 @@ class Food {
       Food(
         'assets/images/dish2.png',
         'Highly Recommended',
-        'Meat Burger',
+        'Chicken Breast',
         '20 min',
         4.5,
         '600 kcal',
@@ -137,6 +156,12 @@ class Food {
           },
           {
             'Shrimp': 'assets/images/ingre2.png',
+          },
+          {
+            'egg': 'assets/images/ingre3.png',
+          },
+          {
+            'green': 'assets/images/ingre4.png',
           }
         ],
         'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
