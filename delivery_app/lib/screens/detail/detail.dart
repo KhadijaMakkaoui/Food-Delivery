@@ -1,3 +1,4 @@
+import 'package:delivery_app/screens/detail/widget/food_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/colors.dart';
@@ -20,10 +21,18 @@ class DetailPage extends StatelessWidget {
               Icons.arrow_back_ios_outlined,
               Icons.favorite_outline,
               leftCallback: () => Navigator.pop(context),
-            )
+            ),
+            FoodImg(food),
+            /*Align(
+              alignment: Alignment.center,
+              child: Container(
+                child: Image.asset(food.imgUrl,
+                    fit: BoxFit.cover),
+              ),
+            ),*/
           ],
-        )
-      )
+        ),
+      ),
     );
   }
 }
