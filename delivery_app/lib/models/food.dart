@@ -34,8 +34,8 @@ class Food {
             'Shrimp': 'assets/images/ingre2.png',
           }
         ]  ,
-        'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
-          highLight: true
+        'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+,          highLight: true
       ),
       Food(
         'assets/images/dish2.png',
@@ -61,8 +61,7 @@ class Food {
         'green': 'assets/images/ingre4.png',
         }
         ],
-        'Our classic burger with a juicy beef patty, fresh lettuce, tomato, and cheese',
-
+        'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
       ),
       Food(
         'assets/images/dish1.png',
