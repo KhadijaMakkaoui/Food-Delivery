@@ -63,7 +63,26 @@ class FoodDetail extends StatelessWidget {
               separatorBuilder: (_,index)=>const SizedBox(width: 10,),
               itemCount: food.ingredients.length,
             ),
-          )
+          ),
+          SizedBox(height: 30,),
+          Row(
+            children: const [
+              Text('About',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 20,),
+          Text(food.about,
+            style: const TextStyle(
+              fontSize: 16,
+              height: 1.5,
+              wordSpacing: 1.5,
+            ),
+          ),
         ],
 
 

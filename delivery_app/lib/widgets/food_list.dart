@@ -12,7 +12,7 @@ class FoodList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categoriy = restaurant.menu.keys.toList();
+    final category = restaurant.menu.keys.toList();
     return Container(
       height: 100,
       padding: const EdgeInsets.symmetric(vertical: 30),
@@ -28,7 +28,7 @@ class FoodList extends StatelessWidget {
                   color: selected== index? kPrimaryColor: Colors.white,
               ),
               child: Text(
-                categoriy[index],
+                category[index],
                 style: TextStyle(
                   color: selected== index? Colors.white: Colors.black,
                   fontSize: 16,
@@ -38,7 +38,7 @@ class FoodList extends StatelessWidget {
             ),
           ),
           separatorBuilder: (_,index)=>SizedBox(width: 20,),
-          itemCount: categoriy.length),
+          itemCount: category.length),
       
     );
   }
