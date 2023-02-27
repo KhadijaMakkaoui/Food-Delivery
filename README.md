@@ -1,2 +1,2 @@
 # Food-Delivery
-Développer un application mobile via Flutter
+Développer une application mobile via Flutter
