@@ -9,7 +9,7 @@ class FoodDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(25),
+      padding: const EdgeInsets.all(25),
       color: kBackground,
       child: Column(
         children: [
@@ -28,7 +28,7 @@ class FoodDetail extends StatelessWidget {
               _buildIconText(Icons.local_fire_department_outlined, Colors.red, food.energy.toString()),
             ],
           ),
-          SizedBox(height: 30,),
+          const SizedBox(height: 30,),
           FoodQuantity(food),
         ],
 
@@ -43,7 +43,7 @@ Widget _buildIconText(IconData icon,Color color,String text){
     children: [
       Icon(icon,color: color,size: 20,),
       Text(text,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 16,
       ),)
     ],
