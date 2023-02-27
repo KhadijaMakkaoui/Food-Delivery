@@ -15,7 +15,7 @@ class FoodQuantity extends StatelessWidget {
       child:Stack(
         children: [
           Align(
-            alignment: Alignment(-0.3,0),
+            alignment: const Alignment(-0.3,0),
             child: Container(
               width:120,
               height: double.maxFinite,
@@ -25,15 +25,15 @@ class FoodQuantity extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  SizedBox(width: 15),
-                  Text('\$',
+                  const SizedBox(width: 15),
+                  const Text('\$',
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(food.price.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
@@ -44,7 +44,7 @@ class FoodQuantity extends StatelessWidget {
             ),
           ),
           Align(
-            alignment: Alignment(0.3,0),
+            alignment: const Alignment(0.3,0),
             child: Container(
               height: double.maxFinite,
               width: 120,

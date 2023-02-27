@@ -30,6 +30,40 @@ class FoodDetail extends StatelessWidget {
           ),
           const SizedBox(height: 30,),
           FoodQuantity(food),
+          const SizedBox(height: 30,),
+          Row(
+            children: const [
+              Text('Ingredients',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10,),
+          SizedBox(
+            height: 100,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context,index)=> Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Column(
+                  children: [
+                    Image.asset(food.ingredients[index].values.first,
+                    width: 52,),
+                    Text(food.ingredients[index].keys.first,                    ),
+                  ],
+                )
+              ),
+              separatorBuilder: (_,index)=>const SizedBox(width: 10,),
+              itemCount: food.ingredients.length,
+            ),
+          )
         ],
 
 
