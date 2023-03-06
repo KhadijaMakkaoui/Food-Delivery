@@ -11,6 +11,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(top: 50),
@@ -39,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                   FloatingActionButton(
                     backgroundColor: kGreen,
                     onPressed: () {},
-                    child: const Icon(Icons.shopping_bag_outlined,
+                    child: const Icon(Icons.shopping_cart_outlined,
                       size: 30,
                     ),
                   ),
@@ -75,7 +76,6 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              SizedBox(height: 20,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -92,85 +92,67 @@ class _HomePageState extends State<HomePage> {
                   ),),
                 ],
               ),
-              SizedBox(height: 20,),
-             /* Container(
-                height: 250,
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                child: PageView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5, // or popularFoods.length
-                  itemBuilder: (context, index) {
-                    return Card(
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/images/dish1.png', // or popularFoods[index].image
-                            height: 170,
-                            fit: BoxFit.cover,
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            'Name', // or popularFoods[index].name
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          Text(
-                            '40', // or '\$${popularFoods[index].price.toStringAsFixed(2)}'
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              )*/
               Container(
-                height: 250,
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                child: PageView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5, // or popularFoods.length
-                  itemBuilder: (context, index) {
-                    return Container(
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      child: Card(
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/dish1.png', // or popularFoods[index].image
-                              height: 100,
-                              width: 100,
+                height: 500,
+                child:
+                ListView.separated(
+                  itemCount:6 /*foodList.length*/,
+                  separatorBuilder: (BuildContext context, int index) => SizedBox(height: 16),
+                  itemBuilder: (BuildContext context, int index) {
+                    /*final food = foodList[index];*/
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image.asset(
+                              'assets/images/pizzafood.png',
+                              height: 200.0,
+                              width: double.infinity,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 10),
-                            Text(
-                              'Name', // or popularFoods[index].name
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                Text(
+                                  /*food.name*/ 'Name',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  /*'\$${food.price.toStringAsFixed(2)}'*/ '40MAD',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: kGreen,
+                                  ),
+                                ),
+                              ],
                             ),
-                            SizedBox(height: 5),
-                            Text(
-                              '40', // or '\$${popularFoods[index].price.toStringAsFixed(2)}'
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
+                            IconButton(onPressed: (){},
+                                icon: Icon(Icons.add_shopping_cart_outlined,
+                                  color: Colors.grey,
+                                ),
                             ),
                           ],
                         ),
-                      ),
+                        SizedBox(height: 16),
+                      ],
                     );
                   },
                 ),
-              )
+              ),
             ],
           ),
 
@@ -184,6 +166,7 @@ Widget _buildCategoryCard(String title, String imagePath) {
     width: 100,
     margin: const EdgeInsets.symmetric(horizontal: 8),
     child: Card(
+      elevation: 0,
       child: Column(
         children: [
           Image.asset(
