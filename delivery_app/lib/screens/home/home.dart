@@ -8,13 +8,13 @@ import '../../models/restaurant.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/food_list_view.dart';
 
-class HomePage extends StatefulWidget {
+class Home extends StatefulWidget {
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<Home> createState() => _HomeState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeState extends State<Home> {
   var selected=0;
   final pageController = PageController();
   final restaurant = Restaurant.generateRestaurant();
