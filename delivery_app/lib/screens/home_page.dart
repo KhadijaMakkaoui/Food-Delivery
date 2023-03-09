@@ -12,12 +12,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-
-  final List<Widget> _pages = [
-    HomePage(),
-    /*ShoppingCartPage(),
-    ProfilePage(),*/
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,12 +88,17 @@ class _HomePageState extends State<HomePage> {
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),),
-                  Text('View All',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: kGreen,
-                  ),),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const Menu()));
+                    },
+                    child: Text('View All',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: kGreen,
+                    ),),
+                  ),
                 ],
               ),
               Container(
@@ -205,39 +204,39 @@ class _HomePageState extends State<HomePage> {
   }
 }
 Widget _buildCategoryCard(BuildContext context,String title, String imagePath) {
-  return GestureDetector(
-onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Restaurants(),
-        ),
-      );
-    },
-    child: Container(
+  return Container(
       width: 100,
       margin: const EdgeInsets.symmetric(horizontal: 6),
-      child: Card(
-        elevation: 0,
-        child: Column(
-          children: [
-            Image.asset(
-              imagePath,
-              height: 50,
-              /*width: double.infinity,*/
-              fit: BoxFit.cover,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Menu(),
             ),
-            SizedBox(height: 5),
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+          );
+        },
+        child: Card(
+          elevation: 0,
+          child: Column(
+            children: [
+              Image.asset(
+                imagePath,
+                height: 50,
+                /*width: double.infinity,*/
+                fit: BoxFit.cover,
               ),
-            ),
-          ],
+              SizedBox(height: 5),
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-    ),
   );
 }
