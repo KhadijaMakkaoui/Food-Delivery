@@ -2,6 +2,8 @@ import 'package:delivery_app/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../models/cart_item.dart';
+import 'home_page.dart';
+import 'orders.dart';
 class ShoppingCart extends StatefulWidget {
 
   const ShoppingCart({Key? key}) : super(key: key);
@@ -9,6 +11,7 @@ class ShoppingCart extends StatefulWidget {
   @override
   State<ShoppingCart> createState() => _ShoppingCartState();
 }
+int _selectedIndex = 0;
 final List<CartItem> cartItems = [
   CartItem(
     name: 'Product 1',
@@ -105,9 +108,49 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     );
                   },
                 ),
+
               ],
             ),
           ),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: (int index) {
+            setState(() {
+              _selectedIndex = index;
+              if (_selectedIndex == 0) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
+              }else if (_selectedIndex == 1) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ShoppingCart()),
+                );
+              }else if (_selectedIndex == 2) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Orders()),
+                );
+              }
+            });
+          },
+          selectedItemColor: kGreen,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+              label: 'Shopping Cart',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              label: 'Orders',
+            ),
+          ],
         ),
       );
     }
