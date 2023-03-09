@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants/colors.dart';
+
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
 
@@ -23,31 +25,104 @@ class _MenuState extends State<Menu> {
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                    Text(
-                      'Restaurant',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 15,
-                      ),
-                    ),
-                    Text(
-                      'McDonalds',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ]),
+                        Text(
+                          'Restaurant',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 15,
+                          ),
+                        ),
+                        Text(
+                          'McDonalds',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ]),
                   Padding(
                     padding: EdgeInsets.only(top: 10),
                     child: Image.asset(
-                    'assets/images/mcdo.png',
-                    height: 60,
-                  ),
+                      'assets/images/mcdo.png',
+                      height: 60,
+                    ),
                   ),
                 ],
               ),
-            ])),
+              SizedBox(height: 20),
+              Wrap(
+                spacing: 20,
+                runSpacing: 20,
+                children: List.generate(6, (index) => _buildItemCard()),
+              ),
+            ]
+            )
+        ),
+      ),
+    );
+  }
+
+  Widget _buildItemCard() {
+    return Container(
+      width: (MediaQuery.of(context).size.width - 60) / 2,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Image.asset(
+                  'assets/images/pizzafood.png',
+                  height: 200,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Positioned(
+                top: 10,
+                right: 10,
+                child: IconButton(
+                  icon: Icon(Icons.add_shopping_cart),
+                  onPressed: () {
+                    // handle adding item to shopping list
+                  },
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
+          Column(
+            children: [
+              Text(
+                'Pizza Margherita',
+                style: TextStyle(
+                  fontSize: 15,
+
+                ),
+              ),
+              SizedBox(height: 5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '110 MAD',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Icon(
+                    Icons.add_shopping_cart_rounded,
+                    color: kGreen,
+                  ),
+
+                ],
+              ),
+            ],
+          ),
+          SizedBox(height: 20),
+        ],
       ),
     );
   }
