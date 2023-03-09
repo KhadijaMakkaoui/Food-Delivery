@@ -1,5 +1,8 @@
 import 'package:delivery_app/constants/colors.dart';
+import 'package:delivery_app/screens/restaurants.dart';
 import 'package:flutter/material.dart';
+
+import 'menu.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -75,11 +78,11 @@ class _HomePageState extends State<HomePage> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    _buildCategoryCard('Burger', 'assets/images/burger.png'),
-                    _buildCategoryCard('Pizza', 'assets/images/pizza.png'),
-                    _buildCategoryCard('Pasta', 'assets/images/pasta.png'),
-                    _buildCategoryCard('wrap', 'assets/images/wrap.png'),
-                    _buildCategoryCard('Salad', 'assets/images/salade.png'),
+                    _buildCategoryCard(context,'Burger', 'assets/images/burger.png'),
+                    _buildCategoryCard(context,'Pizza', 'assets/images/pizza.png'),
+                    _buildCategoryCard(context,'Pasta', 'assets/images/pasta.png'),
+                    _buildCategoryCard(context,'wrap', 'assets/images/wrap.png'),
+                    _buildCategoryCard(context,'Salad', 'assets/images/salade.png'),
                   ],
                 ),
               ),
@@ -100,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               Container(
-                height: 500,
+                height: 450,
                 child:
                 ListView.separated(
                   itemCount:6 /*foodList.length*/,
@@ -117,13 +120,13 @@ class _HomePageState extends State<HomePage> {
                             borderRadius: BorderRadius.circular(10.0),
                             child: Image.asset(
                               'assets/images/pizzafood.png',
-                              height: 200.0,
+                              height: 200,
                               width: double.infinity,
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
-                        SizedBox(height: 16),
+                        SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -137,15 +140,6 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 SizedBox(height: 5),
-                               /* Text(
-                                  *//*'\$${food.price.toStringAsFixed(2)}'*//* '40MAD',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: kGreen,
-                                  ),
-                                ),*/
-
                               ],
                             ),
                             Row(children: [
@@ -173,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                             ]),
                           ],
                         ),
-                        SizedBox(height: 40),
+                        SizedBox(height: 20),
                       ],
                     );
                   },
@@ -191,6 +185,7 @@ class _HomePageState extends State<HomePage> {
             _selectedIndex = index;
           });
         },
+        selectedItemColor: kGreen,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -201,37 +196,47 @@ class _HomePageState extends State<HomePage> {
             label: 'Shopping Cart',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.history),
+            label: 'Orders',
           ),
         ],
       ),
     );
   }
 }
-Widget _buildCategoryCard(String title, String imagePath) {
-  return Container(
-    width: 100,
-    margin: const EdgeInsets.symmetric(horizontal: 8),
-    child: Card(
-      elevation: 0,
-      child: Column(
-        children: [
-          Image.asset(
-            imagePath,
-            height: 50,
-            /*width: double.infinity,*/
-            fit: BoxFit.cover,
-          ),
-          SizedBox(height: 5),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+Widget _buildCategoryCard(BuildContext context,String title, String imagePath) {
+  return GestureDetector(
+onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Restaurants(),
+        ),
+      );
+    },
+    child: Container(
+      width: 100,
+      margin: const EdgeInsets.symmetric(horizontal: 6),
+      child: Card(
+        elevation: 0,
+        child: Column(
+          children: [
+            Image.asset(
+              imagePath,
+              height: 50,
+              /*width: double.infinity,*/
+              fit: BoxFit.cover,
             ),
-          ),
-        ],
+            SizedBox(height: 5),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     ),
   );

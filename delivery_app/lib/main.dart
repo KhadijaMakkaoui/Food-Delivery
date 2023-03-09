@@ -1,5 +1,6 @@
 import 'package:delivery_app/screens/home/home.dart';
 import 'package:delivery_app/screens/home_page.dart';
+import 'package:delivery_app/screens/menu.dart';
 import 'package:delivery_app/screens/restaurants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,10 +24,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Food Delivery App',
+      home: const HomePage(),
       routes: {
-        '/home': (context) => Home(),
-        '/restaurants': (context) => const Restaurants(),
-        '/': (context) => const HomePage(),
+        /*'/home': (context) => Home(),*/
+        '/menu': (context) => const Menu(),
+        '/home': (context) => const HomePage(),
       },
     );
   }
