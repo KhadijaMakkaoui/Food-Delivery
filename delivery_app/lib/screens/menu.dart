@@ -18,7 +18,8 @@ class _MenuState extends State<Menu> {
         child: Container(
             margin: EdgeInsets.only(top: 50),
             padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Column(children: [
+            child: Column(
+                children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -58,6 +59,7 @@ class _MenuState extends State<Menu> {
             ]
             )
         ),
+
       ),
     );
   }
@@ -121,9 +123,9 @@ class _MenuState extends State<Menu> {
               ),
             ],
           ),
-          SizedBox(height: 20),
         ],
       ),
+
     );
   }
 }
