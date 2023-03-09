@@ -1,8 +1,10 @@
 import 'package:delivery_app/constants/colors.dart';
 import 'package:delivery_app/screens/restaurants.dart';
+import 'package:delivery_app/screens/shopping_cart.dart';
 import 'package:flutter/material.dart';
 
 import 'menu.dart';
+import 'orders.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -182,6 +184,22 @@ class _HomePageState extends State<HomePage> {
         onTap: (int index) {
           setState(() {
             _selectedIndex = index;
+            if (_selectedIndex == 0) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
+            }else if (_selectedIndex == 1) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ShoppingCart()),
+              );
+            }else if (_selectedIndex == 2) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Orders()),
+              );
+            }
           });
         },
         selectedItemColor: kGreen,
