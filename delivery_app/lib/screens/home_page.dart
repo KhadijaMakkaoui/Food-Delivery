@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Popular Items',
+                  Text('Popular Restaurants',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -137,24 +137,43 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 SizedBox(height: 5),
-                                Text(
-                                  /*'\$${food.price.toStringAsFixed(2)}'*/ '40MAD',
+                               /* Text(
+                                  *//*'\$${food.price.toStringAsFixed(2)}'*//* '40MAD',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     color: kGreen,
                                   ),
-                                ),
+                                ),*/
+
                               ],
                             ),
-                            IconButton(onPressed: (){},
-                                icon: Icon(Icons.add_shopping_cart_outlined,
-                                  color: Colors.grey,
+                            Row(children: [
+
+
+                              Text(
+                                '14 MAD',
+                                style:
+                                const TextStyle(
+                                  fontSize: 18,
+
                                 ),
-                            ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Icon(
+                                  Icons
+                                      .delivery_dining,
+                                  color:
+                                  kGreen),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                            ]),
                           ],
                         ),
-                        SizedBox(height: 16),
+                        SizedBox(height: 40),
                       ],
                     );
                   },
