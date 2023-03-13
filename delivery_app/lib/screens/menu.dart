@@ -57,9 +57,8 @@ class _MenuState extends State<Menu> {
                 children: List.generate(6, (index) => _buildItemCard()),
               ),
             ]
-            )
+            ),
         ),
-
       ),
     );
   }
