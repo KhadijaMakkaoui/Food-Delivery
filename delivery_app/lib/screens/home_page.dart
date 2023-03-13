@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/constants/colors.dart';
+import 'package:delivery_app/models/restaurant.dart';
 import 'package:delivery_app/screens/restaurants.dart';
 import 'package:delivery_app/screens/shopping_cart.dart';
 import 'package:delivery_app/services/restoService.dart';
@@ -15,6 +17,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+/*
+  Stream<List<Restaurant>> _restaurants = RestoService().readRestos();
+*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,23 +54,23 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
 
                       RestoService().createRestaurant(
-                        label: 'CCA23',
-                        name: 'Burger King',
-                        waitTime: '20-30 min',
+                        label: 'DDA23',
+                        name: 'TACOS DE LYON',
+                        waitTime: '10-15 min',
                         distance: '2.4 km',
-                        logoUrl: 'assets/images/burgerking.png',
-                        desc: 'The best burger in town',
+                        logoUrl: 'assets/images/tacosdelyon.png',
+                        desc: 'The best Tacos in town',
                         score: '4.5',
                       );
-                      RestoService().createRestaurant(
-                        label: 'BB123',
-                        name: 'Pizza Hut',
-                        waitTime: '20-30 min',
-                        distance: '2.4 km',
-                        logoUrl: 'assets/images/pizzahut.png',
-                        desc: 'The best pizza in town',
-                        score: '4.9',
-                      );
+                      // RestoService().createRestaurant(
+                      //   label: 'BB123',
+                      //   name: 'Pizza Hut',
+                      //   waitTime: '20-30 min',
+                      //   distance: '2.4 km',
+                      //   logoUrl: 'assets/images/pizzahut.png',
+                      //   desc: 'The best pizza in town',
+                      //   score: '4.9',
+                      // );
                     },
                     child: const Icon(Icons.shopping_cart_outlined,
                       size: 30,
@@ -124,75 +129,92 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+              //Restaurants list
               Container(
                 height: 450,
                 child:
-                ListView.separated(
-                  itemCount:6 /*foodList.length*/,
-                  separatorBuilder: (BuildContext context, int index) => SizedBox(height: 16),
-                  itemBuilder: (BuildContext context, int index) {
-                    /*final food = foodList[index];*/
-
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Image.asset(
-                              'assets/images/pizzafood.png',
-                              height: 200,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              children: [
-                                Text(
-                                  /*food.name*/ 'Name',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                FutureBuilder<List<Restaurant>>(
+                  future: RestoService().getAllRestaurants()/*RestoService().readRestos()*/,
+                  builder: (context, snapshot) {
+                    if(snapshot.hasData) {
+                      /*final restos= snapshot.data;*/
+                      List<Restaurant> restos = snapshot.data!;                      print(restos);  //print the data
+                      return ListView.separated(
+                        itemCount: restos.length,
+                        separatorBuilder: (BuildContext context, int index) => SizedBox(height: 16),
+                        itemBuilder: (BuildContext context, int index) {
+                          Restaurant resto = restos[index];
+                          // print(resto.distance);
+                          // print(resto.name);
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  child: Image.asset(
+                                    resto.logoUrl,
+                                    height: 200,
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
-                                SizedBox(height: 5),
-                              ],
-                            ),
-                            Row(children: [
+                              ),
+                              SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Text(
+                                        resto.name ,
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 5),
+                                    ],
+                                  ),
+                                  Row(children: [
 
 
-                              Text(
-                                '14 MAD',
-                                style:
-                                const TextStyle(
-                                  fontSize: 18,
+                                    Text(
+                                      resto.distance,
+                                      style:
+                                      const TextStyle(
+                                        fontSize: 18,
 
-                                ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    const Icon(
+                                        Icons
+                                            .delivery_dining,
+                                        color:
+                                        kGreen),
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                  ]),
+                                ],
                               ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              const Icon(
-                                  Icons
-                                      .delivery_dining,
-                                  color:
-                                  kGreen),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                            ]),
-                          ],
-                        ),
-                        SizedBox(height: 20),
-                      ],
-                    );
-                  },
+                              SizedBox(height: 20),
+                            ],
+                          );
+                        },
+                      );
+                    }else if(snapshot.hasError) {
+                      return Text('Error ${snapshot.error}');
+                    }
+                    else{
+                      return const Center(child: CircularProgressIndicator());
+                    }
+
+                  }
                 ),
               ),
             ],
@@ -242,6 +264,69 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+Widget buildRestaurant(Restaurant restaurant){
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      Padding(
+        padding: const EdgeInsets.all(0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: Image.asset(
+            restaurant.logoUrl,
+            height: 200,
+            width: double.infinity,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+      SizedBox(height: 10),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            children: [
+              Text(
+                restaurant.name ,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 5),
+            ],
+          ),
+          Row(children: [
+
+
+            Text(
+              restaurant.distance + 'KM',
+              style:
+              const TextStyle(
+                fontSize: 18,
+
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            const Icon(
+                Icons
+                    .delivery_dining,
+                color:
+                kGreen),
+            const SizedBox(
+              width: 15,
+            ),
+          ]),
+        ],
+      ),
+      SizedBox(height: 20),
+    ],
+  );
+}
+
+
 Widget _buildCategoryCard(BuildContext context,String title, String imagePath) {
   return Container(
       width: 100,
