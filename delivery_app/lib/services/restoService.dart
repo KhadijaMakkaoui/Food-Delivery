@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:delivery_app/screens/restaurants.dart';
 import 'package:flutter/material.dart';
+
+import '../models/restaurant.dart';
 class RestoService extends StatefulWidget {
   const RestoService({Key? key}) : super(key: key);
 
@@ -20,6 +23,13 @@ class RestoService extends StatefulWidget {
     await docResto.set(json);
   }
 
+  Future<List<Restaurant>> getAllRestaurants() async {
+    QuerySnapshot querySnapshot =
+    await FirebaseFirestore.instance.collection('restaurants').get();
+    List<Restaurant> restaurants =
+    querySnapshot.docs.map((doc) => Restaurant.fromJson(doc.data()as Map<String, dynamic>)).toList();
+    return restaurants;
+  }
 }
 
 class _RestoServiceState extends State<RestoService> {
