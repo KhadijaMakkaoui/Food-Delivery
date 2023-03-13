@@ -1,6 +1,7 @@
 import 'package:delivery_app/constants/colors.dart';
 import 'package:delivery_app/screens/restaurants.dart';
 import 'package:delivery_app/screens/shopping_cart.dart';
+import 'package:delivery_app/services/restoService.dart';
 import 'package:flutter/material.dart';
 
 import 'menu.dart';
@@ -45,7 +46,27 @@ class _HomePageState extends State<HomePage> {
                   ),
                   FloatingActionButton(
                     backgroundColor: kGreen,
-                    onPressed: () {},
+                    onPressed: () {
+
+                      RestoService().createRestaurant(
+                        label: 'CCA23',
+                        name: 'Burger King',
+                        waitTime: '20-30 min',
+                        distance: '2.4 km',
+                        logoUrl: 'assets/images/burgerking.png',
+                        desc: 'The best burger in town',
+                        score: '4.5',
+                      );
+                      RestoService().createRestaurant(
+                        label: 'BB123',
+                        name: 'Pizza Hut',
+                        waitTime: '20-30 min',
+                        distance: '2.4 km',
+                        logoUrl: 'assets/images/pizzahut.png',
+                        desc: 'The best pizza in town',
+                        score: '4.9',
+                      );
+                    },
                     child: const Icon(Icons.shopping_cart_outlined,
                       size: 30,
                     ),

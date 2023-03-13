@@ -1,10 +1,11 @@
 import 'food.dart';
 
 class Restaurant{
+  String label;
   String name;
   String waitTime;
   String distance;
-  String label;
+
   String logoUrl;
   String desc;
   num score;
