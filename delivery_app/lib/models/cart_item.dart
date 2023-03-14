@@ -1,11 +1,11 @@
 class CartItem {
-  final String id;
+  final int id;
   final String title;
-  final int quantity;
+  late final int quantity;
   final double price;
   final String imageUrl;
 
-  CartItem({required this.id,required this.title,required this.quantity, required this.price, required this.imageUrl});
+  CartItem({required this.id,required this.title,this.quantity=1, required this.price, required this.imageUrl});
 
   factory CartItem.fromJson(Map<String, dynamic> json) {
     return CartItem(
