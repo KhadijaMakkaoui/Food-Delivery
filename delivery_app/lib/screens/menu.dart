@@ -1,15 +1,24 @@
+
+import 'package:delivery_app/models/cart.dart';
+import 'package:delivery_app/models/cart_item.dart';
+import 'package:delivery_app/screens/shopping_cart.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
+import '../widgets/add_to_cart_button.dart';
 
 class Menu extends StatefulWidget {
-  const Menu({Key? key}) : super(key: key);
+Menu({Key? key}) : super(key: key);
 
   @override
   State<Menu> createState() => _MenuState();
 }
 
 class _MenuState extends State<Menu> {
+  final CartItem item=CartItem(id: 1, title: 'kk', price: 213, imageUrl: 'assets/images/pizzafood.png');
+
+  final cart =Cart();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,29 +83,20 @@ class _MenuState extends State<Menu> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
                 child: Image.asset(
-                  'assets/images/pizzafood.png',
+                  item.imageUrl,
                   height: 200,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
               ),
-              Positioned(
-                top: 10,
-                right: 10,
-                child: IconButton(
-                  icon: Icon(Icons.add_shopping_cart),
-                  onPressed: () {
-                    // handle adding item to shopping list
-                  },
-                ),
-              ),
+
             ],
           ),
           SizedBox(height: 10),
           Column(
             children: [
               Text(
-                'Pizza Margherita',
+                item.title.toString(),
                 style: TextStyle(
                   fontSize: 15,
 
@@ -107,16 +107,17 @@ class _MenuState extends State<Menu> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '110 MAD',
+                    item.price.toString(),
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Icon(
+                 /* const Icon(
                     Icons.add_shopping_cart_rounded,
                     color: kGreen,
-                  ),
+                  ),*/
+                  AddToCartButton(item: item,cart: cart),
 
                 ],
               ),
@@ -136,12 +137,12 @@ Widget _buildCategoryCard(
     margin: const EdgeInsets.symmetric(horizontal: 6),
     child: GestureDetector(
       onTap: () {
-        Navigator.push(
+        /*Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Menu(),
+            builder: (context) => Menu(item, cart),
           ),
-        );
+        );*/
       },
       child: Card(
         elevation: 0,
