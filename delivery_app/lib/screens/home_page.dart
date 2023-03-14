@@ -6,17 +6,19 @@ import 'package:delivery_app/screens/shopping_cart.dart';
 import 'package:delivery_app/services/restoService.dart';
 import 'package:flutter/material.dart';
 
+import '../models/cart_item.dart';
 import 'menu.dart';
 import 'orders.dart';
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final List<CartItem> cartItems;
+  const HomePage({Key? key,required this.cartItems}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
-
+int _selectedIndex = 0;
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
+
 /*
   Stream<List<Restaurant>> _restaurants = RestoService().readRestos();
 */
@@ -52,8 +54,13 @@ class _HomePageState extends State<HomePage> {
                   FloatingActionButton(
                     backgroundColor: kGreen,
                     onPressed: () {
-
-                      RestoService().createRestaurant(
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ShoppingCart(cartItems: widget.cartItems,),
+                        ),
+                      );
+                      /*RestoService().createRestaurant(
                         label: 'DDA23',
                         name: 'TACOS DE LYON',
                         waitTime: '10-15 min',
@@ -61,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                         logoUrl: 'assets/images/tacosdelyon.png',
                         desc: 'The best Tacos in town',
                         score: '4.5',
-                      );
+                      );*/
                       // RestoService().createRestaurant(
                       //   label: 'BB123',
                       //   name: 'Pizza Hut',
@@ -118,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                   ),),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const Menu()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>  Menu()));
                     },
                     child: Text('View All',
                     style: TextStyle(
@@ -230,12 +237,12 @@ class _HomePageState extends State<HomePage> {
             if (_selectedIndex == 0) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage()),
+                MaterialPageRoute(builder: (context) => HomePage(cartItems: widget.cartItems,)),
               );
             }else if (_selectedIndex == 1) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ShoppingCart()),
+                MaterialPageRoute(builder: (context) => ShoppingCart(cartItems: widget.cartItems,)),
               );
             }else if (_selectedIndex == 2) {
               Navigator.push(
