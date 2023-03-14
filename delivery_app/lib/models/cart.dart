@@ -1,33 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'cart_item.dart';
+
 class Cart{
-  final String id;
-  final String title;
-  final int quantity;
-  final double price;
-
-  Cart({
-    required this.id,
-    required this.title,
-    required this.quantity,
-    required this.price,
-  });
-  factory Cart.fromJson(Map<String, dynamic> json) {
-    return Cart(
-      id: json['id'],
-      title: json['title'],
-      quantity: json['quantity'],
-      price: json['price'],
-    );
+  final List<CartItem> _items = [];
+  List<CartItem> get items => _items;
+  void add(CartItem item){
+    /*if(_items.contains(item)){
+      _items[_items.indexOf(item)].quantity++;
+    }else*/
+    _items.add(item);
+    /*print(_items.length)  ;*/
   }
-  factory Cart.fromDocument(DocumentSnapshot doc) {
-    return Cart.fromJson(doc.data() as Map<String, dynamic>);
+  void remove(CartItem item){
+    _items.remove(item);
   }
-  Map<String, dynamic> toJson() => {
-    'id': id,
-    'title': title,
-    'quantity': quantity,
-    'price': price,
-  };
-
+  void clear(){
+    _items.clear();
+  }
+  double get total {
+    return _items.fold(
+        0,
+            (sum, item) => sum + item.price * item.quantity);
+  }
 }
