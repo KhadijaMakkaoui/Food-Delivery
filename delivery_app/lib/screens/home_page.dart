@@ -10,16 +10,18 @@ import '../models/cart_item.dart';
 import '../models/food.dart';
 import 'menu.dart';
 import 'orders.dart';
+
 class HomePage extends StatefulWidget {
   final List<Food> foodItems;
-  const HomePage({Key? key,required this.foodItems}) : super(key: key);
+  const HomePage({Key? key, required this.foodItems}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
-int _selectedIndex = 0;
-class _HomePageState extends State<HomePage> {
 
+int _selectedIndex = 0;
+
+class _HomePageState extends State<HomePage> {
 /*
   Stream<List<Restaurant>> _restaurants = RestoService().readRestos();
 */
@@ -39,17 +41,20 @@ class _HomePageState extends State<HomePage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Hi there!',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 15,
-                      ),),
-                      Text('Hungry Now?',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),),
-
+                      Text(
+                        'Hi there!',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 15,
+                        ),
+                      ),
+                      Text(
+                        'Hungry Now?',
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                   FloatingActionButton(
@@ -58,7 +63,9 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ShoppingCart(foodtems: widget.foodItems,),
+                          builder: (context) => ShoppingCart(
+                            foodtems: widget.foodItems,
+                          ),
                         ),
                       );
                       /*RestoService().createRestaurant(
@@ -80,13 +87,16 @@ class _HomePageState extends State<HomePage> {
                       //   score: '4.9',
                       // );
                     },
-                    child: const Icon(Icons.shopping_cart_outlined,
+                    child: const Icon(
+                      Icons.shopping_cart_outlined,
                       size: 30,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 30,),
+              const SizedBox(
+                height: 30,
+              ),
               Row(
                 children: [
                   Expanded(
@@ -108,50 +118,59 @@ class _HomePageState extends State<HomePage> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    _buildCategoryCard(context,'Burger', 'assets/images/burger.png'),
-                    _buildCategoryCard(context,'Pizza', 'assets/images/pizza.png'),
-                    _buildCategoryCard(context,'Pasta', 'assets/images/pasta.png'),
-                    _buildCategoryCard(context,'wrap', 'assets/images/wrap.png'),
-                    _buildCategoryCard(context,'Salad', 'assets/images/salade.png'),
+                    _buildCategoryCard(
+                        context, 'Burger', 'assets/images/burger.png'),
+                    _buildCategoryCard(
+                        context, 'Pizza', 'assets/images/pizza.png'),
+                    _buildCategoryCard(
+                        context, 'Pasta', 'assets/images/pasta.png'),
+                    _buildCategoryCard(
+                        context, 'wrap', 'assets/images/wrap.png'),
+                    _buildCategoryCard(
+                        context, 'Salad', 'assets/images/salade.png'),
                   ],
                 ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Popular Restaurants',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),),
+                  Text(
+                    'Popular Restaurants',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   GestureDetector(
                     onTap: () {
 /*
                       Navigator.push(context, MaterialPageRoute(builder: (context) =>  Menu()));
 */
                     },
-                    child: Text('View All',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: kGreen,
-                    ),),
+                    child: Text(
+                      'View All',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: kGreen,
+                      ),
+                    ),
                   ),
                 ],
               ),
               //Restaurants list
               Container(
                 height: 450,
-                child:
-                FutureBuilder<List<Restaurant>>(
-                    future : RestoService().getAllRestaurants(),
+                child: FutureBuilder<List<Restaurant>>(
+                    future: RestoService().getAllRestaurants(),
                     builder: (context, snapshot) {
-                      if(snapshot.hasData) {
+                      if (snapshot.hasData) {
                         List<Restaurant> restos = snapshot.data!;
 
                         return ListView.separated(
                           itemCount: restos.length,
-                          separatorBuilder: (BuildContext context, int index) => SizedBox(height: 16),
+                          separatorBuilder: (BuildContext context, int index) =>
+                              SizedBox(height: 16),
                           itemBuilder: (BuildContext context, int index) {
                             Restaurant resto = restos[index];
 
@@ -160,7 +179,8 @@ class _HomePageState extends State<HomePage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Menu(restaurantRef:resto),
+                                    builder: (context) =>
+                                        Menu(restaurantRef: resto),
                                   ),
                                 );
                               },
@@ -174,18 +194,15 @@ class _HomePageState extends State<HomePage> {
                             );
                           },
                         );
-                      } else if(snapshot.hasError) {
+                      } else if (snapshot.hasError) {
                         return Text('Error ${snapshot.error}');
                       } else {
                         return const Center(child: CircularProgressIndicator());
                       }
-                    }
-                ),
-
+                    }),
               ),
             ],
           ),
-
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -196,14 +213,20 @@ class _HomePageState extends State<HomePage> {
             if (_selectedIndex == 0) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage(foodItems: widget.foodItems,)),
+                MaterialPageRoute(
+                    builder: (context) => HomePage(
+                          foodItems: widget.foodItems,
+                        )),
               );
-            }else if (_selectedIndex == 1) {
+            } else if (_selectedIndex == 1) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ShoppingCart(foodtems: widget.foodItems,)),
+                MaterialPageRoute(
+                    builder: (context) => ShoppingCart(
+                          foodtems: widget.foodItems,
+                        )),
               );
-            }else if (_selectedIndex == 2) {
+            } else if (_selectedIndex == 2) {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => Orders()),
@@ -230,7 +253,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-Widget buildRestaurant(Restaurant restaurant){
+
+Widget buildRestaurant(Restaurant restaurant) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
@@ -253,7 +277,7 @@ Widget buildRestaurant(Restaurant restaurant){
           Column(
             children: [
               Text(
-                restaurant.name ,
+                restaurant.name,
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -263,24 +287,16 @@ Widget buildRestaurant(Restaurant restaurant){
             ],
           ),
           Row(children: [
-
-
             Text(
               restaurant.waitTime,
-              style:
-              const TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
-
               ),
             ),
             const SizedBox(
               width: 10,
             ),
-            const Icon(
-                Icons
-                    .delivery_dining,
-                color:
-                kGreen),
+            const Icon(Icons.delivery_dining, color: kGreen),
             const SizedBox(
               width: 15,
             ),
@@ -292,41 +308,41 @@ Widget buildRestaurant(Restaurant restaurant){
   );
 }
 
-
-Widget _buildCategoryCard(BuildContext context,String title, String imagePath) {
+Widget _buildCategoryCard(
+    BuildContext context, String title, String imagePath) {
   return Container(
-      width: 100,
-      margin: const EdgeInsets.symmetric(horizontal: 6),
-      child: GestureDetector(
-        onTap: () {
-         /* Navigator.push(
+    width: 100,
+    margin: const EdgeInsets.symmetric(horizontal: 6),
+    child: GestureDetector(
+      onTap: () {
+        /* Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => Menu(),
             ),
           );*/
-        },
-        child: Card(
-          elevation: 0,
-          child: Column(
-            children: [
-              Image.asset(
-                imagePath,
-                height: 50,
-                /*width: double.infinity,*/
-                fit: BoxFit.cover,
+      },
+      child: Card(
+        elevation: 0,
+        child: Column(
+          children: [
+            Image.asset(
+              imagePath,
+              height: 50,
+              /*width: double.infinity,*/
+              fit: BoxFit.cover,
+            ),
+            SizedBox(height: 5),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(height: 5),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
+    ),
   );
 }

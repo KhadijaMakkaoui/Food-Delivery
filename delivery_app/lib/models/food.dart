@@ -7,13 +7,12 @@ class Food {
 
   Food(this.imgUrl, this.desc, this.name, this.price, this.restoRef);
 
-  Food.fromJson(Map<String, dynamic> json):
-        imgUrl = json['imgUrl'],
+  Food.fromJson(Map<String, dynamic> json)
+      : imgUrl = json['imgUrl'],
         desc = json['desc'],
         name = json['name'],
         price = json['price'],
         restoRef = json['restoRef'];
-
 
   /*  String waitTime;
   num score;
@@ -21,8 +20,6 @@ class Food {
    List<Map<String,String>>ingredients;
   String about;
   bool highLight;*/
-
-
 
 /*  static List<Food> generateRecommendFoods(){
     return[

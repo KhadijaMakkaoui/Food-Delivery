@@ -88,12 +88,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             ],
                           ),
                         ),
-                        IconButton(onPressed: (){
-                          setState(() {
-                            widget.foodtems.remove(widget.foodtems[index]);
-                          });
-                        }, icon:
-                        Icon(Icons.delete, color: kGreen, size: 30,),)
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              widget.foodtems.remove(widget.foodtems[index]);
+                            });
+                          },
+                          icon: Icon(
+                            Icons.delete,
+                            color: kGreen,
+                            size: 30,
+                          ),
+                        )
                       ],
                     ),
                   );
@@ -111,7 +117,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
             if (_selectedIndex == 0) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage(foodItems: widget.foodtems,)),
+                MaterialPageRoute(
+                    builder: (context) => HomePage(
+                          foodItems: widget.foodtems,
+                        )),
               );
             } else if (_selectedIndex == 1) {
               Navigator.push(
@@ -139,13 +148,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
             label: 'Shopping Cart',
           ),
           BottomNavigationBarItem(
-            icon: Icon
-              (Icons.history),
+            icon: Icon(Icons.history),
             label: 'Orders',
           ),
         ],
       ),
     );
   }
-
 }

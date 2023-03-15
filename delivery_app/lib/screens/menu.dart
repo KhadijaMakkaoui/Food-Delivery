@@ -24,7 +24,6 @@ class _MenuState extends State<Menu> {
 
   final cart = Cart();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,53 +34,54 @@ class _MenuState extends State<Menu> {
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Column(children: [
             FutureBuilder<Restaurant>(
-              future: widget.restaurantRef != null
-                  ? RestoService().getRestaurantByRef(widget.restaurantRef!.label)
-                  : null,
-              builder: (context, snapshot) {
-                if(snapshot.hasData){
-                  final restaurant = snapshot.data!;
+                future: widget.restaurantRef != null
+                    ? RestoService()
+                        .getRestaurantByRef(widget.restaurantRef!.label)
+                    : null,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final restaurant = snapshot.data!;
 
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        Text(
-                          'Restaurant',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 15,
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Restaurant',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              Text(
+                                restaurant.name,
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ]),
+                        Padding(
+                          padding: EdgeInsets.only(top: 10),
+                          child: Image.asset(
+                            restaurant.logoUrl,
+                            height: 60,
                           ),
                         ),
-                        Text(
-                          restaurant.name,
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ]),
-                      Padding(
-                        padding: EdgeInsets.only(top: 10),
-                        child: Image.asset(
-                          restaurant.logoUrl,
-                          height: 60,
-                        ),
-                      ),
-                    ],
-                  );
-                } else {
-                  return Center(child: Text(''));
-
-                }
-
-              }
-            ),
+                      ],
+                    );
+                  } else {
+                    return Center(child: Text(''));
+                  }
+                }),
             SizedBox(height: 20),
             FutureBuilder<List<Food>>(
-                future:  FoodService().getFoodsByRestaurant(widget.restaurantRef!.label),
+                future: FoodService()
+                    .getFoodsByRestaurant(widget.restaurantRef!.label),
                 builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting){
+                  if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasData) {
                     List<Food> items = snapshot.data!;
@@ -124,7 +124,7 @@ class _MenuState extends State<Menu> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        items[index].price.toString()+' DH',
+                                        items[index].price.toString() + ' DH',
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
@@ -141,16 +141,15 @@ class _MenuState extends State<Menu> {
                         );
                       }),
                     );
-                 } else if (snapshot.hasError) {
-                     return  Center(
-                       child: Text(snapshot.error.toString()),
-                     );
-                  }
-                   else if (snapshot.hasError) {
-                     return Center(
+                  } else if (snapshot.hasError) {
+                    return Center(
                       child: Text(snapshot.error.toString()),
                     );
-                   } else {
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text(snapshot.error.toString()),
+                    );
+                  } else {
                     return Center(child: Text(''));
                   }
                 }),

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../models/food.dart';
+
 class FoodService extends StatefulWidget {
   const FoodService({Key? key}) : super(key: key);
 
@@ -14,11 +15,14 @@ class FoodService extends StatefulWidget {
     querySnapshot.docs.map((doc) => Food.fromJson(doc.data()as Map<String, dynamic>)).toList();
     return foods;
   }*/
-  Future <List<Food>> getFoodsByRestaurant(String RestoRef) async {
-    QuerySnapshot querySnapshot =
-    await FirebaseFirestore.instance.collection('food').where('restoRef',isEqualTo: RestoRef).get();
-    List<Food> foods =
-    querySnapshot.docs.map((doc) => Food.fromJson(doc.data()as Map<String, dynamic>)).toList();
+  Future<List<Food>> getFoodsByRestaurant(String RestoRef) async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('food')
+        .where('restoRef', isEqualTo: RestoRef)
+        .get();
+    List<Food> foods = querySnapshot.docs
+        .map((doc) => Food.fromJson(doc.data() as Map<String, dynamic>))
+        .toList();
     return foods;
   }
 }

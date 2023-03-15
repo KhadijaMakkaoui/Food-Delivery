@@ -27,13 +27,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Food Delivery App',
-      home: const HomePage(foodItems: [],),
+      home: const HomePage(
+        foodItems: [],
+      ),
       routes: {
         /*'/home': (context) => Home(),*/
         /*'/menu': (context) =>  Menu(restaurantRef: null),*/
-        '/home': (context) => const HomePage(foodItems: [],),
+        '/home': (context) => const HomePage(
+              foodItems: [],
+            ),
       },
     );
   }
 }
-
