@@ -13,7 +13,7 @@ import 'orders.dart';
 
 class HomePage extends StatefulWidget {
   final List<Food> foodItems;
-  const HomePage({Key? key, required this.foodItems}) : super(key: key);
+  const HomePage({Key? key, required final this.foodItems}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -22,9 +22,7 @@ class HomePage extends StatefulWidget {
 int _selectedIndex = 0;
 
 class _HomePageState extends State<HomePage> {
-/*
-  Stream<List<Restaurant>> _restaurants = RestoService().readRestos();
-*/
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
