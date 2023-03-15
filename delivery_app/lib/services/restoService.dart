@@ -30,6 +30,13 @@ class RestoService extends StatefulWidget {
     querySnapshot.docs.map((doc) => Restaurant.fromJson(doc.data()as Map<String, dynamic>)).toList();
     return restaurants;
   }
+  Future<Restaurant> getRestaurantByRef(String ref) async {
+    QuerySnapshot querySnapshot =
+    await FirebaseFirestore.instance.collection('restaurants').where('label',isEqualTo: ref).get();
+    Restaurant restaurant =
+    Restaurant.fromJson(querySnapshot.docs.first.data() as Map<String, dynamic>);
+    return restaurant;
+  }
 }
 
 class _RestoServiceState extends State<RestoService> {

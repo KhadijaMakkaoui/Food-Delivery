@@ -2,20 +2,29 @@ class Food {
   String imgUrl;
   String desc;
   String name;
-  String waitTime;
+  num price;
+  String restoRef;
+
+  Food(this.imgUrl, this.desc, this.name, this.price, this.restoRef);
+
+  Food.fromJson(Map<String, dynamic> json):
+        imgUrl = json['imgUrl'],
+        desc = json['desc'],
+        name = json['name'],
+        price = json['price'],
+        restoRef = json['restoRef'];
+
+
+  /*  String waitTime;
   num score;
   String energy;
-  num price;
-  num quantity;
-  List<Map<String,String>>ingredients;
+   List<Map<String,String>>ingredients;
   String about;
-  bool highLight;
+  bool highLight;*/
 
-  Food(this.imgUrl, this.desc, this.name, this.waitTime, this.score,this.energy, this.price,
-      this.quantity, this.ingredients, this.about,
-      {this.highLight = false});
 
-  static List<Food> generateRecommendFoods(){
+
+/*  static List<Food> generateRecommendFoods(){
     return[
       Food(
         'assets/images/dish3.png',
@@ -168,5 +177,5 @@ class Food {
       ),
       // Add more Food objects as needed
     ];
-  }
+  }*/
 }

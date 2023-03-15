@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:delivery_app/models/food.dart';
 
 import 'cart_item.dart';
 
 class Cart{
-  final List<CartItem> _items = [];
-  List<CartItem> get items => _items;
-  void add(CartItem item){
+  final List<Food> _items = [];
+  List<Food> get items => _items;
+  void add(Food item){
     /*if(_items.contains(item)){
       _items[_items.indexOf(item)].quantity++;
     }else*/
@@ -18,9 +19,9 @@ class Cart{
   void clear(){
     _items.clear();
   }
-  double get total {
+/*  double get total {
     return _items.fold(
         0,
-            (sum, item) => sum + item.price * item.quantity);
-  }
+            (sum, item) => sum + item.price * item.restoRef);
+  }*/
 }

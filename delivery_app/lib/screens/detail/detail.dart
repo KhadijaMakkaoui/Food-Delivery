@@ -24,7 +24,7 @@ class DetailPage extends StatelessWidget {
               leftCallback: () => Navigator.pop(context),
             ),
             FoodImg(food),
-           FoodDetail(food),
+         /*  FoodDetail(food),*/
 
           ],
         ),
@@ -52,7 +52,7 @@ class DetailPage extends StatelessWidget {
                   color: Colors.white,
                     shape: BoxShape.circle,
                 ),
-                child: Text(food.quantity.toString(),
+                child: Text(food.restoRef.toString(),
                   style: const TextStyle(
                     fontSize: 18,
                     color: Colors.black,

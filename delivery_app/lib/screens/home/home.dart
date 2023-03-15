@@ -1,3 +1,4 @@
+/*
 import 'package:delivery_app/constants/colors.dart';
 import 'package:delivery_app/widgets/food_list.dart';
 import 'package:delivery_app/widgets/restaurant_info.dart';
@@ -96,3 +97,4 @@ class _HomeState extends State<Home> {
 }
 
 
+*/

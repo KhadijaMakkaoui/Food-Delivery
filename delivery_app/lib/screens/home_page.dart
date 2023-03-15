@@ -7,11 +7,12 @@ import 'package:delivery_app/services/restoService.dart';
 import 'package:flutter/material.dart';
 
 import '../models/cart_item.dart';
+import '../models/food.dart';
 import 'menu.dart';
 import 'orders.dart';
 class HomePage extends StatefulWidget {
-  final List<CartItem> cartItems;
-  const HomePage({Key? key,required this.cartItems}) : super(key: key);
+  final List<Food> foodItems;
+  const HomePage({Key? key,required this.foodItems}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -57,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ShoppingCart(cartItems: widget.cartItems,),
+                          builder: (context) => ShoppingCart(foodtems: widget.foodItems,),
                         ),
                       );
                       /*RestoService().createRestaurant(
@@ -125,7 +126,9 @@ class _HomePageState extends State<HomePage> {
                   ),),
                   GestureDetector(
                     onTap: () {
+/*
                       Navigator.push(context, MaterialPageRoute(builder: (context) =>  Menu()));
+*/
                     },
                     child: Text('View All',
                     style: TextStyle(
@@ -141,88 +144,44 @@ class _HomePageState extends State<HomePage> {
                 height: 450,
                 child:
                 FutureBuilder<List<Restaurant>>(
-                  future: RestoService().getAllRestaurants()/*RestoService().readRestos()*/,
-                  builder: (context, snapshot) {
-                    if(snapshot.hasData) {
-                      /*final restos= snapshot.data;*/
-                      List<Restaurant> restos = snapshot.data!;                      print(restos);  //print the data
-                      return ListView.separated(
-                        itemCount: restos.length,
-                        separatorBuilder: (BuildContext context, int index) => SizedBox(height: 16),
-                        itemBuilder: (BuildContext context, int index) {
-                          Restaurant resto = restos[index];
-                          // print(resto.distance);
-                          // print(resto.name);
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  child: Image.asset(
-                                    resto.logoUrl,
-                                    height: 200,
-                                    width: double.infinity,
-                                    fit: BoxFit.cover,
+                    future : RestoService().getAllRestaurants(),
+                    builder: (context, snapshot) {
+                      if(snapshot.hasData) {
+                        List<Restaurant> restos = snapshot.data!;
+
+                        return ListView.separated(
+                          itemCount: restos.length,
+                          separatorBuilder: (BuildContext context, int index) => SizedBox(height: 16),
+                          itemBuilder: (BuildContext context, int index) {
+                            Restaurant resto = restos[index];
+
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Menu(restaurantRef:resto),
                                   ),
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                );
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
-                                  Column(
-                                    children: [
-                                      Text(
-                                        resto.name ,
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(height: 5),
-                                    ],
-                                  ),
-                                  Row(children: [
-
-
-                                    Text(
-                                      resto.distance,
-                                      style:
-                                      const TextStyle(
-                                        fontSize: 18,
-
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    const Icon(
-                                        Icons
-                                            .delivery_dining,
-                                        color:
-                                        kGreen),
-                                    const SizedBox(
-                                      width: 15,
-                                    ),
-                                  ]),
+                                  // restaurant details
+                                  buildRestaurant(resto),
                                 ],
                               ),
-                              SizedBox(height: 20),
-                            ],
-                          );
-                        },
-                      );
-                    }else if(snapshot.hasError) {
-                      return Text('Error ${snapshot.error}');
+                            );
+                          },
+                        );
+                      } else if(snapshot.hasError) {
+                        return Text('Error ${snapshot.error}');
+                      } else {
+                        return const Center(child: CircularProgressIndicator());
+                      }
                     }
-                    else{
-                      return const Center(child: CircularProgressIndicator());
-                    }
-
-                  }
                 ),
+
               ),
             ],
           ),
@@ -237,12 +196,12 @@ class _HomePageState extends State<HomePage> {
             if (_selectedIndex == 0) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage(cartItems: widget.cartItems,)),
+                MaterialPageRoute(builder: (context) => HomePage(foodItems: widget.foodItems,)),
               );
             }else if (_selectedIndex == 1) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ShoppingCart(cartItems: widget.cartItems,)),
+                MaterialPageRoute(builder: (context) => ShoppingCart(foodtems: widget.foodItems,)),
               );
             }else if (_selectedIndex == 2) {
               Navigator.push(
@@ -307,7 +266,7 @@ Widget buildRestaurant(Restaurant restaurant){
 
 
             Text(
-              restaurant.distance + 'KM',
+              restaurant.waitTime,
               style:
               const TextStyle(
                 fontSize: 18,
@@ -340,12 +299,12 @@ Widget _buildCategoryCard(BuildContext context,String title, String imagePath) {
       margin: const EdgeInsets.symmetric(horizontal: 6),
       child: GestureDetector(
         onTap: () {
-          Navigator.push(
+         /* Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => Menu(),
             ),
-          );
+          );*/
         },
         child: Card(
           elevation: 0,

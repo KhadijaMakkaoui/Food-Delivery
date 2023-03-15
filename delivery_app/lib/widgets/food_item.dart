@@ -59,7 +59,9 @@ class FoodItem extends StatelessWidget {
                     const SizedBox(height: 5,),
                     Text(food.desc,
                         style:TextStyle(
+/*
                           color: food.highLight? kPrimaryColor:Colors.grey.withOpacity(0.4),
+*/
                           height: 1.5,
                         )
                     ),

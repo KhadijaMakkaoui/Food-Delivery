@@ -1,23 +1,29 @@
-
 import 'package:delivery_app/models/cart.dart';
 import 'package:delivery_app/models/cart_item.dart';
+import 'package:delivery_app/models/food.dart';
+import 'package:delivery_app/models/restaurant.dart';
 import 'package:delivery_app/screens/shopping_cart.dart';
+import 'package:delivery_app/services/restoService.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
+import '../services/foodService.dart';
 import '../widgets/add_to_cart_button.dart';
 
 class Menu extends StatefulWidget {
-Menu({Key? key}) : super(key: key);
+  Restaurant? restaurantRef;
+
+  Menu({this.restaurantRef});
 
   @override
   State<Menu> createState() => _MenuState();
 }
 
 class _MenuState extends State<Menu> {
-  final CartItem item=CartItem(id: 1, title: 'kk', price: 213, imageUrl: 'assets/images/pizzafood.png');
+  late Restaurant _restaurant;
 
-  final cart =Cart();
+  final cart = Cart();
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +31,21 @@ class _MenuState extends State<Menu> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
-            margin: EdgeInsets.only(top: 50),
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-                children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+          margin: EdgeInsets.only(top: 50),
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Column(children: [
+            FutureBuilder<Restaurant>(
+              future: widget.restaurantRef != null
+                  ? RestoService().getRestaurantByRef(widget.restaurantRef!.label)
+                  : null,
+              builder: (context, snapshot) {
+                if(snapshot.hasData){
+                  final restaurant = snapshot.data!;
+
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                         Text(
                           'Restaurant',
                           style: TextStyle(
@@ -43,36 +54,113 @@ class _MenuState extends State<Menu> {
                           ),
                         ),
                         Text(
-                          'McDonalds',
+                          restaurant.name,
                           style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ]),
-                  Padding(
-                    padding: EdgeInsets.only(top: 10),
-                    child: Image.asset(
-                      'assets/images/mcdo.png',
-                      height: 60,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-              Wrap(
-                spacing: 20,
-                runSpacing: 20,
-                children: List.generate(6, (index) => _buildItemCard()),
-              ),
-            ]
+                      Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Image.asset(
+                          restaurant.logoUrl,
+                          height: 60,
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return Center(child: Text(''));
+
+                }
+
+              }
             ),
+            SizedBox(height: 20),
+            FutureBuilder<List<Food>>(
+                future:  FoodService().getFoodsByRestaurant(widget.restaurantRef!.label),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting){
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasData) {
+                    List<Food> items = snapshot.data!;
+                    print(items.first.name);
+                    print(items.length);
+                    return Wrap(
+                      spacing: 20,
+                      runSpacing: 20,
+                      children: List.generate(items.length, (index) {
+                        return Container(
+                          width: (MediaQuery.of(context).size.width - 60) / 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Stack(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    child: Image.asset(
+                                      items[index].imgUrl,
+                                      height: 200,
+                                      width: double.infinity,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 10),
+                              Column(
+                                children: [
+                                  Text(
+                                    items[index].name,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        items[index].price.toString()+' DH',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      AddToCartButton(
+                                          item: items[index], cart: cart),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
+                    );
+                 } else if (snapshot.hasError) {
+                     return  Center(
+                       child: Text(snapshot.error.toString()),
+                     );
+                  }
+                   else if (snapshot.hasError) {
+                     return Center(
+                      child: Text(snapshot.error.toString()),
+                    );
+                   } else {
+                    return Center(child: Text(''));
+                  }
+                }),
+          ]),
         ),
       ),
     );
   }
 
-  Widget _buildItemCard() {
+  /*Widget _buildItemCard() {
     return Container(
       width: (MediaQuery.of(context).size.width - 60) / 2,
       child: Column(
@@ -113,10 +201,10 @@ class _MenuState extends State<Menu> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                 /* const Icon(
+                 */ /* const Icon(
                     Icons.add_shopping_cart_rounded,
                     color: kGreen,
-                  ),*/
+                  ),*/ /*
                   AddToCartButton(item: item,cart: cart),
 
                 ],
@@ -127,8 +215,9 @@ class _MenuState extends State<Menu> {
       ),
 
     );
-  }
+  }*/
 }
+/*
 
 Widget _buildCategoryCard(
     BuildContext context, String title, String imagePath) {
@@ -137,12 +226,14 @@ Widget _buildCategoryCard(
     margin: const EdgeInsets.symmetric(horizontal: 6),
     child: GestureDetector(
       onTap: () {
-        /*Navigator.push(
+        */
+/*Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => Menu(item, cart),
           ),
-        );*/
+        );*/ /*
+
       },
       child: Card(
         elevation: 0,
@@ -151,7 +242,9 @@ Widget _buildCategoryCard(
             Image.asset(
               imagePath,
               height: 50,
-              /*width: double.infinity,*/
+              */
+/*width: double.infinity,*/ /*
+
               fit: BoxFit.cover,
             ),
             SizedBox(height: 5),
@@ -167,4 +260,4 @@ Widget _buildCategoryCard(
       ),
     ),
   );
-}
+}*/

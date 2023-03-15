@@ -1,4 +1,5 @@
 import 'package:delivery_app/constants/colors.dart';
+import 'package:delivery_app/models/food.dart';
 import 'package:flutter/material.dart';
 
 import '../models/cart_item.dart';
@@ -6,9 +7,9 @@ import 'home_page.dart';
 import 'orders.dart';
 
 class ShoppingCart extends StatefulWidget {
-  final List<CartItem> cartItems;
+  final List<Food> foodtems;
 
-  const ShoppingCart({Key? key, required this.cartItems}) : super(key: key);
+  const ShoppingCart({Key? key, required this.foodtems}) : super(key: key);
 
   @override
   State<ShoppingCart> createState() => _ShoppingCartState();
@@ -38,7 +39,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     ),
                   ),
                   Text(
-                    '${widget.cartItems.length} items',
+                    '${widget.foodtems.length} items',
                     style: TextStyle(
                       color: kGreen,
                       fontSize: 20,
@@ -49,7 +50,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: widget.cartItems.length,
+                itemCount: widget.foodtems.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
@@ -58,7 +59,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       children: [
                         ClipOval(
                           child: Image.asset(
-                            widget.cartItems[index].imageUrl,
+                            widget.foodtems[index].imgUrl,
                             width: 80,
                             height: 80,
                             fit: BoxFit.cover,
@@ -70,7 +71,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                widget.cartItems[index].title,
+                                widget.foodtems[index].name,
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
@@ -78,7 +79,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               ),
                               SizedBox(height: 10),
                               Text(
-                                '\$${widget.cartItems[index].price}',
+                                '\$${widget.foodtems[index].price}',
                                 style: TextStyle(
                                   fontSize: 18,
                                   color: kGreen,
@@ -89,7 +90,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         ),
                         IconButton(onPressed: (){
                           setState(() {
-                            widget.cartItems.remove(widget.cartItems[index]);
+                            widget.foodtems.remove(widget.foodtems[index]);
                           });
                         }, icon:
                         Icon(Icons.delete, color: kGreen, size: 30,),)
@@ -110,13 +111,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
             if (_selectedIndex == 0) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage(cartItems: widget.cartItems,)),
+                MaterialPageRoute(builder: (context) => HomePage(foodItems: widget.foodtems,)),
               );
             } else if (_selectedIndex == 1) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ShoppingCart(cartItems: widget.cartItems),
+                  builder: (context) => ShoppingCart(foodtems: widget.foodtems),
                 ),
               );
             } else if (_selectedIndex == 2) {

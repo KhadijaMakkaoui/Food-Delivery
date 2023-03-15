@@ -67,7 +67,7 @@ class FoodQuantity extends StatelessWidget {
                       color: Colors.white,
                     shape: BoxShape.circle,
                     ),
-                    child: Text(food.quantity.toString(),
+                    child: Text(food.restoRef.toString(),
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

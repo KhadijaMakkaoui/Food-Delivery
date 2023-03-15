@@ -12,7 +12,7 @@ class FoodList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final category = restaurant.menu.keys.toList();
+    final category =null; /*restaurant.menu.keys.toList();*/
     return Container(
       height: 100,
       padding: const EdgeInsets.symmetric(vertical: 30),
